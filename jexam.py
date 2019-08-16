@@ -6,11 +6,11 @@ import time
 import requests
 import re
 
-lookfor = []
+lookfor = [] # hier gewünschte Fächer eingeben (ausschreiben)
 
 def telegram_bot_sendtext(user, msg):
     
-    bot_token = ''
+    bot_token = '' #api key einfügen
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + user + '&parse_mode=Markdown&text=' + msg
 
     response = requests.get(send_text)
@@ -36,7 +36,7 @@ def checkForUpdate():
                 eachP = eachP.replace('\\xc3\\xb6', 'ö')
                 testsonline.append(eachP)
 
-    bot_chatIDs = ['']
+    bot_chatIDs = [''] #alle IDs reingeben die benachrichtigt werden sollen
     for user in bot_chatIDs:
         for item in lookfor:
             for itemx in testsonline:
