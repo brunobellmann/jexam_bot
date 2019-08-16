@@ -24,7 +24,7 @@ def checkForUpdate():
     respData = resp.read()
     heading = re.findall(r'<a(.*?)/a>', str(respData))
     for h in heading:
-        if "" in h: 
+        if "" in h: #Semester eintragen für das ihr eure Prüfungen haben wollt. Bsp: Sommersemester 2019
             paragraphs = re.findall(r'<li>(.*?)</li>',str(respData))
             for eachP in paragraphs:
                 if "Es wird" in eachP:
