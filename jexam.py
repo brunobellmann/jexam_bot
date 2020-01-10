@@ -5,14 +5,18 @@ import sched
 import time
 import requests
 import re
+import json
 
-lookfor = [] # hier gewünschte Fächer eingeben (ausschreiben)
+with open('config.json') as json_data_file:
+    data = json.load(json_data_file)
+
+lookfor = data.get("modules")
+
 
 def telegram_bot_sendtext(user, msg):
     
-    bot_token = '' #api key einfügen
+    bot_token = data.get("bot_token")
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + user + '&parse_mode=Markdown&text=' + msg
-
     response = requests.get(send_text)
     return response.json()
 
@@ -24,7 +28,7 @@ def checkForUpdate():
     respData = resp.read()
     heading = re.findall(r'<a(.*?)/a>', str(respData))
     for h in heading:
-        if "" in h: #Semester eintragen für das ihr eure Prüfungen haben wollt. Bsp: Sommersemester 2019
+        if data.get("semester") in h: 
             paragraphs = re.findall(r'<li>(.*?)</li>',str(respData))
             for eachP in paragraphs:
                 if "Es wird" in eachP:
@@ -36,7 +40,9 @@ def checkForUpdate():
                 eachP = eachP.replace('\\xc3\\xb6', 'ö')
                 testsonline.append(eachP)
 
-    bot_chatIDs = [''] #alle IDs reingeben die benachrichtigt werden sollen
+    
+
+    bot_chatIDs = data.get("chatIds")
     for user in bot_chatIDs:
         for item in lookfor:
             for itemx in testsonline:
