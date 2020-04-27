@@ -4,6 +4,7 @@
 import requests
 import re
 import json
+import traceback
 
 modules = open("modules.txt", "r")
 lookfor = modules.read().splitlines()
@@ -33,7 +34,6 @@ def telegram_bot_sendtext(user, msg):
 # potential debug notification
 telegram_bot_sendtext("", "started")
 
-
 def checkForUpdate(lookfor):
     response = requests.get("https://jexamgroup.blogspot.com")
     heading = re.findall(r"<a(.*?)/a>", str(response.text))
@@ -42,17 +42,17 @@ def checkForUpdate(lookfor):
     for h in heading:
         if semester in h:
             paragraphs = re.findall(r"<li>(.*?)</li>", str(response.text))
-        for eachP in paragraphs:
-            if "Es wird" in eachP:
-                break
+            for eachP in paragraphs:
+                if "Es wird" in eachP:
+                    break
 
-            for subject in lookfor:
-                if subject in eachP:
-                    for user in bot_chatIDs:
-                        telegram_bot_sendtext(user, eachP + " ist online.")
-                        lookfor.remove(subject)
+                for subject in lookfor:
+                    if subject in eachP:
+                        for user in bot_chatIDs:
+                            telegram_bot_sendtext(user, eachP + " ist online.")
+                            lookfor.remove(subject)
                         break
-        break
+            break
 
     editFile = open("modules.txt", "w")
     editFile.write("\n".join(lookfor))
@@ -65,4 +65,5 @@ try:
 except Exception as e:
     me = ""
     error = str(e)
+    error = traceback.format_exc()
     telegram_bot_sendtext(me, error)
