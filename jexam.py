@@ -47,7 +47,7 @@ def checkForUpdate(lookfor):
                     break
 
                 for subject in lookfor:
-                    if subject in eachP:
+                    if subject.lower() in eachP.lower():
                         for user in bot_chatIDs:
                             telegram_bot_sendtext(user, eachP + " ist online.")
                             lookfor.remove(subject)
