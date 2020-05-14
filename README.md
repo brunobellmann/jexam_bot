@@ -6,4 +6,4 @@ Telegrambot um aktuelle Prüfungsergebnisse von jExam TU Dresden abzufragen
 Sämtliche Einträge in Doublequotes schreiben
 
 # Mögliche Verbesserungsmöglichkeiten:
-automatisierte einrichtung über chat in telegram
+* automatisierte einrichtung über chat in telegram
