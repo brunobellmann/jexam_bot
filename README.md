@@ -1,6 +1,5 @@
 # jexam_bot
-Telegrambot um aktuelle Prüfungsergebnisse von jExam TU Dresden abzufragen
-
+Telegrambot um aktuelle Prüfungsergebnisse von jExam der TU Dresden abzufragen
 
 # Hinweis zur Benutzung der JSONFile
 Sämtliche Einträge in Doublequotes schreiben
