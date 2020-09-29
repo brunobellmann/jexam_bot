@@ -1,0 +1,25 @@
+{
+  "name": "jexam_bot",
+  "version": "1.0.0",
+  "description": "This is a Telegram Bot to get notifications about test results from jExam",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunobellmann/jexam_bot.git"
+  },
+  "author": "brunobellmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brunobellmann/jexam_bot/issues"
+  },
+  "homepage": "https://github.com/brunobellmann/jexam_bot#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "telegraf": "^3.38.0",
+    "telegraf-session-local": "^2.0.0",
+    "winston": "^3.3.3"
+  }
+}
