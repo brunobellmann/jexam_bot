@@ -1,0 +1,6 @@
+- MacOS via HomeBrew:
+  
+  Python 3.9.:
+    brew install python@3.9
+    pip install requests
+    pip install -U python-dotenv
