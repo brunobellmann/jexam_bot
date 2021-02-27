@@ -15,7 +15,6 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 # get current date for scope
 today = date.today()
-semester = 'Sommersemester 2020'
 
 # set wintersemester range
 winterStart = (2, 1)
