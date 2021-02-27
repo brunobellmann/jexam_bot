@@ -258,3 +258,6 @@ dist
 
 # Database
 sessions.json
+
+# Environment variables
+.env
