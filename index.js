@@ -33,7 +33,7 @@ if (process.env.NODE_ENV !== "production") {
 const Telegraf = require("telegraf");
 const LocalSession = require("telegraf-session-local");
 
-const bot = new Telegraf('813069260:AAES7a8FLrvmxK47LitZN7Y3DKJRBU-2y_0');
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.use(new LocalSession().middleware());
 
