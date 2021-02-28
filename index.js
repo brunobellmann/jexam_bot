@@ -1,36 +1,6 @@
 require("dotenv").config();
-const winston = require("winston");
 
-const customFormat = winston.format.combine(
-  winston.format.timestamp(),
-  winston.format.simple()
-);
-
-const logger = winston.createLogger({
-  level: "error",
-  format: customFormat,
-  transports: [
-    //
-    // - Write all logs with level `error` and below to `error.log`
-    //
-    new winston.transports.File({ filename: "error.log" }),
-  ],
-});
-
-//
-// If we're not in production then log to the `console` with the format:
-// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
-//
-if (process.env.NODE_ENV !== "production") {
-  logger.add(
-    new winston.transports.Console({
-      level: "info",
-      format: customFormat,
-    })
-  );
-}
-
-const Telegraf = require("telegraf");
+const { Telegraf } = require("telegraf");
 const LocalSession = require("telegraf-session-local");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -73,3 +43,7 @@ bot.command("/remove", (ctx) => {
 });
 
 bot.launch();
+
+// Enable graceful stop
+process.once("SIGINT", () => bot.stop("SIGINT"));
+process.once("SIGTERM", () => bot.stop("SIGTERM"));

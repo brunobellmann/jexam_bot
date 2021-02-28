@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This is a Telegram Bot to get notifications about test results from jExam",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,8 +18,7 @@
   "homepage": "https://github.com/brunobellmann/jexam_bot#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "telegraf": "^3.38.0",
-    "telegraf-session-local": "^2.0.0",
-    "winston": "^3.3.3"
+    "telegraf": "^4.1.1",
+    "telegraf-session-local": "^2.1.0"
   }
 }

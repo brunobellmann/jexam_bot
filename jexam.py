@@ -8,10 +8,12 @@ import traceback
 from dotenv import load_dotenv
 import os
 from datetime import date
+from bs4 import BeautifulSoup
 
 # get bot_token
 load_dotenv()
-BOT_TOKEN = os.getenv('BOT_TOKEN')
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+ADMIN_ID = os.getenv("ADMIN_ID")
 
 # get current date for scope
 today = date.today()
@@ -41,20 +43,25 @@ with open("sessions.json") as json_data_file:
     sessions = json.load(json_data_file)
 
     for user in sessions.get("sessions"):
-        for c in user['data']['courses']:
+        for c in user["data"]["courses"]:
             lookfor.append(c)
 
 # sort and remove duplications
 lookfor = sorted(set(lookfor))
 
+# TODO Skip if nothing in lookfor
 # if not lookfor:
 exit
 
+
 def checkForUpdate(lookfor):
     response = requests.get("https://jexamgroup.blogspot.com")
+    # TODO Vielleicht als HTML parsen
+    # TODO https://www.crummy.com/software/BeautifulSoup/bs4/doc/
     heading = re.findall(r"<a(.*?)/a>", str(response.text))
     for h in heading:
         if semester in h:
+            # TODO Das funktioniert so nicht, wenn oben das Semester gesetzt werden soll
             paragraphs = re.findall(r"<li>(.*?)</li>", str(response.text))
             for eachP in paragraphs:
                 if "Es wird" in eachP:
@@ -63,21 +70,22 @@ def checkForUpdate(lookfor):
                 # check for possible online subject
                 for subject in lookfor:
                     if subject.lower() in eachP.lower():
-                            removable[subject] = eachP
-                
+                        removable[subject] = eachP
+
                 # remove subjects from session.json if subject online found
                 for user in sessions.get("sessions"):
-                    courses = user['data']['courses']
+                    courses = user["data"]["courses"]
                     for key, value in removable.items():
                         if key in courses:
-                            telegram_bot_sendtext(user['id'], value + " ist online.")
+                            telegram_bot_sendtext(user["id"], value + " ist online.")
                             courses.remove(key)
                             if not courses:
                                 sessions.get("sessions").remove(user)
-            with open('sessions.json', 'w') as out:
+            with open("sessions.json", "w") as out:
                 json.dump(sessions, out, indent=4)
-                
+
             break
+
 
 # function to actually send a message to the incoming user
 def telegram_bot_sendtext(user, msg):
@@ -89,15 +97,16 @@ def telegram_bot_sendtext(user, msg):
         + "&parse_mode=Markdown&text="
         + msg
     )
-    
+
     response = requests.get(send_text)
     return response.json()
+
 
 try:
     checkForUpdate(lookfor)
 # potential error notifaction if bot crashes
-except Exception as e:
-    me = ""
-    error = str(e)
+except Exception:
+    traceback.print_exc()
+    me = ADMIN_ID
     error = traceback.format_exc()
     telegram_bot_sendtext(me, error)
