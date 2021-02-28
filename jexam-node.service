@@ -1,0 +1,12 @@
+[Unit]
+Description=Node script for JExam Telegram Bot
+After=network.target
+ 
+[Service]
+ExecStart=/usr/bin/node /home/pi/jexam_bot/index.js
+WorkingDirectory=/home/pi/jexam_bot/
+Restart=always
+User=pi
+ 
+[Install]
+WantedBy=multi-user.target
