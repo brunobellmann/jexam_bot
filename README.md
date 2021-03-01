@@ -47,7 +47,7 @@ Note: All those environment variables are required to use the bot.
 
 ```bash
 npm install
-pip install -r requirements.txt --user
+pip3 install -r requirements.txt --user
 sudo sh install.sh
 ```
 
@@ -57,10 +57,11 @@ sudo sh install.sh
 sudo sh uninstall.sh
 ```
 
-## Usage mit Python (auf MacOS):
+## Development setup (on MacOS):
 
 ```bash
 brew install python@3.9
-pip install requests
-pip install -U python-dotenv
+pip3 install -r requirements.txt --user
+brew install node
+npm install
 ```
