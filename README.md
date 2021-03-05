@@ -1,4 +1,4 @@
-# JExam Telegram Bot
+# jExam Telegram Bot
 
 Telegrambot um aktuelle Prüfungsergebnisse von jExam der TU Dresden abzufragen.
 
