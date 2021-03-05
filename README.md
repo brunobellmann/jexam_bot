@@ -6,7 +6,7 @@ This bot consists of two parts:
 
 1. Node.js app that handles the observed courses for each user.
 
-2. Python script that periodically checks if those courses are online on JExam.
+2. Python script that periodically checks if those courses are online on jExam.
 
 ## Deploy to Raspberry Pi
 
