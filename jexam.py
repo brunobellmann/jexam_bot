@@ -56,10 +56,9 @@ def getSemester():
 def getLookForModules(sessions) -> [str]:
     lookfor = []
     for user in sessions["sessions"]:
-        for c in user["data"]["courses"]:
+        for c in user["courses"]:
             lookfor.append(c)
     return lookfor
-
 
 def checkForUpdate(lookfor):
     removable = {}
@@ -82,7 +81,7 @@ def checkForUpdate(lookfor):
 
         # remove subjects from session.json if subject online found
         for user in sessions.get("sessions"):
-            courses = user["data"]["courses"]
+            courses = user["courses"]
             for key, value in removable.items():
                 if key in courses:
                     replacedString = value.replace("<br/>", "")
