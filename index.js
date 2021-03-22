@@ -67,6 +67,11 @@ bot.command("/stats", (ctx) => {
       ctx.from.username || ctx.from.id
     }`
   );
+  
+  var output = JSON.stringify(j, null, 4);
+  fs.writeFile('sessions.json', output, function (err) {
+    if (err) return console.log(err);
+  });
 });
 
 bot.command("/remove", (ctx) => {
@@ -74,9 +79,10 @@ bot.command("/remove", (ctx) => {
   var userID = ctx.from.id;
   var courses = "";
 
-  j.sessions.forEach(function(obj) {
+  j.sessions.forEach(function(obj, index) {
     if (obj.id == userID) {
       courses = Array.prototype.join.call(obj.courses);
+      j.sessions.splice(index, 1);
     }
   });
 
@@ -85,7 +91,11 @@ bot.command("/remove", (ctx) => {
       ctx.from.username || ctx.from.id
     }`
   );
-  ctx.session = null;
+
+  var output = JSON.stringify(j, null, 4);
+  fs.writeFile('sessions.json', output, function (err) {
+    if (err) return console.log(err);
+  });
 });
 
 bot.launch();
