@@ -7,6 +7,8 @@ ExecStart=/usr/bin/node /home/pi/jexam_bot/index.js
 WorkingDirectory=/home/pi/jexam_bot/
 Restart=always
 User=pi
+StandardOutput=append:/home/pi/jexam_bot/node_output.log
+StandardError=append:/home/pi/jexam_bot/node_error.log
  
 [Install]
 WantedBy=multi-user.target
