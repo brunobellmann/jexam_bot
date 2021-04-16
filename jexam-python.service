@@ -7,6 +7,8 @@ ExecStart=/usr/bin/python3 /home/pi/jexam_bot/jexam.py
 WorkingDirectory=/home/pi/jexam_bot/
 Restart=always
 User=pi
+StandardOutput=append:/home/pi/jexam_bot/python_output.log
+StandardError=append:/home/pi/jexam_bot/python_error.log
  
 [Install]
 WantedBy=multi-user.target
