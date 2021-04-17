@@ -44,9 +44,9 @@ def getSemester():
 
     # check for semester
     if winterStart < (today.month, today.day) < winterEnd:
-        shortyear = today.strftime("%y")
-        nextyear = int(shortyear) + 1
-        return "Wintersemester " + str(shortyear) + "/" + str(nextyear)
+        currentyear = today.strftime("%Y")
+        lastyear = int(currentyear) - 1
+        return "Wintersemester " + str(lastyear) + "/" + str(currentyear)
     elif sommerStart < (today.month, today.day) < sommerEnd:
         return "Sommersemester " + year
     else:
@@ -89,7 +89,7 @@ def checkForUpdate(lookfor):
                     courses.remove(key)
                     if not courses:
                         sessions.get("sessions").remove(user)
-    with open("sessions.json", "w") as out:
+    with open("usersessions.json", "w") as out:
         json.dump(sessions, out, indent=4)
     return
 
@@ -101,7 +101,7 @@ while True:
 
         sessions = {}
 
-        with open("sessions.json") as json_data_file:
+        with open("usersessions.json") as json_data_file:
             sessions = json.load(json_data_file)
 
         lookfor = getLookForModules(sessions)

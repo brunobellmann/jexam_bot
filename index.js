@@ -15,7 +15,7 @@ bot.start((ctx) => ctx.replyWithMarkdown(startMessage));
 bot.help((ctx) => ctx.replyWithMarkdown(startMessage));
 
 bot.command("/add", (ctx) => {
-  var j = JSON.parse(fs.readFileSync('sessions.json', 'utf8'));
+  var j = JSON.parse(fs.readFileSync('usersessions.json', 'utf8'));
   var userID = ctx.from.id;
   var exists = false;
   j.sessions.forEach(function(obj) {
@@ -46,14 +46,14 @@ bot.command("/add", (ctx) => {
 
     ctx.replyWithMarkdown(`Observed courses: \`${courses}\``);
     var output = JSON.stringify(j, null, 4);
-    fs.writeFile('sessions.json', output, function (err) {
+    fs.writeFile('usersessions.json', output, function (err) {
       if (err) return console.log(err);
     });
   }
 });
 
 bot.command("/stats", (ctx) => {
-  var j = JSON.parse(fs.readFileSync('sessions.json', 'utf8'));
+  var j = JSON.parse(fs.readFileSync('usersessions.json', 'utf8'));
   var userID = ctx.from.id;
   var courses = "none";
   j.sessions.forEach(function(obj) {
@@ -69,13 +69,13 @@ bot.command("/stats", (ctx) => {
   );
   
   var output = JSON.stringify(j, null, 4);
-  fs.writeFile('sessions.json', output, function (err) {
+  fs.writeFile('usersessions.json', output, function (err) {
     if (err) return console.log(err);
   });
 });
 
 bot.command("/remove", (ctx) => {
-  var j = JSON.parse(fs.readFileSync('sessions.json', 'utf8'));
+  var j = JSON.parse(fs.readFileSync('usersessions.json', 'utf8'));
   var userID = ctx.from.id;
   var courses = "";
 
@@ -93,7 +93,7 @@ bot.command("/remove", (ctx) => {
   );
 
   var output = JSON.stringify(j, null, 4);
-  fs.writeFile('sessions.json', output, function (err) {
+  fs.writeFile('usersessions.json', output, function (err) {
     if (err) return console.log(err);
   });
 });
