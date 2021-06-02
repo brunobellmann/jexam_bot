@@ -35,12 +35,12 @@ def getSemester():
     today = date.today()
 
     # set wintersemester range
-    winterStart = (2, 1)
-    winterEnd = (6, 1)
+    winterStart = (1, 1)
+    winterEnd = (6, 30)
 
     # set sommersemester range
     sommerStart = (7, 1)
-    sommerEnd = (11, 1)
+    sommerEnd = (12, 31)
 
     # check for semester
     if winterStart < (today.month, today.day) < winterEnd:
