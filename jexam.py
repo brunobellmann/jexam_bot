@@ -41,14 +41,15 @@ def getSemester():
     # set sommersemester range
     sommerStart = (7, 1)
     sommerEnd = (12, 31)
+    
+    currentyear = today.strftime("%Y")
 
     # check for semester
     if winterStart <= (today.month, today.day) <= winterEnd:
-        currentyear = today.strftime("%Y")
         lastyear = int(currentyear) - 1
         return "Wintersemester " + str(lastyear) + "/" + str(currentyear)
     elif sommerStart <= (today.month, today.day) <= sommerEnd:
-        return "Sommersemester " + year
+        return "Sommersemester " + currentyear
     else:
         raise Exception("Error while calculating semester")
 
